@@ -24,33 +24,17 @@ class Park(ABC):
 
         self.index_table = self._update_index_table()
 
-    @abstractmethod
-    def _update_index_table(self):
-        ...
-
-    @abstractmethod
-    def get_actual_entry_prices(self):
-        ...
-    
-    @abstractmethod
-    def get_base_index(self):
-        ...
-
-    @abstractmethod
-    def get_last_index(self):
-        ...
-
-    @abstractmethod
-    def get_info_table(self) -> dict:
-        ...
-
-class ChapadaDosVeadeiros(Park):
-
     def _update_index_table(self) -> pd.DataFrame:
 
         client = ClientFactory.create_ipea_client(index=self.price_index)
 
         return client.get_table()
+
+    def get_actual_entry_prices(self):
+
+        actual_entry_price = self.base_entry_price * (self.get_last_index()/self.get_base_index())
+
+        return round(float(actual_entry_price), 0)
     
     def get_base_index(self) -> np.float64:
 
@@ -59,7 +43,7 @@ class ChapadaDosVeadeiros(Park):
         base_index = self.index_table.query("VALDATA == @date").VALVALOR.iloc[0]
 
         return base_index
-    
+
     def get_last_index(self):
 
         month = pd.Timestamp(self.base_date).month
@@ -68,12 +52,12 @@ class ChapadaDosVeadeiros(Park):
 
         return last_index
 
-    def get_actual_entry_prices(self):
+    @abstractmethod
+    def get_info_table(self) -> dict:
+        ...
 
-        actual_entry_price = self.base_entry_price * (self.get_last_index()/self.get_base_index())
-
-        return round(float(actual_entry_price), 0)
-
+class ChapadaDosVeadeiros(Park):
+    
     def get_actual_service_prices(self):  
 
         actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
@@ -91,7 +75,18 @@ class ChapadaDosVeadeiros(Park):
             "Meia Entrada": entry_price/2,
             "Entorno": round(entry_price*0.1, 0),
             "Acampamento": camping_price
+        }
+    
+class Itatiaia(Park):
 
+    def get_info_table(self):
+
+        entry_price = self.get_actual_entry_prices()
+
+        return {
+            "Entrada": entry_price,
+            "Meia Entrada": entry_price/2,
+            "Entorno": round(entry_price*0.1, 1)
         }
     
 class ParkFactory:
@@ -108,6 +103,13 @@ class ParkFactory:
                 base_service_price= 22.0
             )
         
+        elif park == "Itatiaia":
 
+            return Itatiaia(
+                base_date = '2022-09-01',
+                base_entry_price = 40.0,
+                update_frequency= 12,
+                price_index = "IPCA"
+            )
 
 

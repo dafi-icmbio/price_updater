@@ -40,7 +40,7 @@ st.markdown(f"##### Informações para o Parque Nacional {str(st.session_state.p
 st.write("")
 
 st.markdown(f"""
-            Preços em Reais (R$) praticados
+            Preços em Reais (R$) autorizados
             em **{translate_month(datetime.today().date().strftime("%B"))}
             de {datetime.today().date().strftime("%Y")}**
             """)

@@ -1,5 +1,6 @@
 import streamlit as st
 from src.park.park_factory import ParkFactory
+from src.utils import translate_month
 import pandas as pd
 
 from datetime import datetime
@@ -22,7 +23,11 @@ add_selectbox = st.sidebar.selectbox(
 
 park = ParkFactory.create_park(park=st.session_state.park)
 
-st.markdown(f"Preços em {datetime.today().date().strftime("%B de %Y")} para {str(st.session_state.park)}")
+st.markdown(f"""
+            Preços em **{translate_month(datetime.today().date().strftime("%B"))}
+            de {datetime.today().date().strftime("%Y")}**
+            para o Parque Nacional {str(st.session_state.park)}:
+            """)
 
 st.write(
     pd.DataFrame(

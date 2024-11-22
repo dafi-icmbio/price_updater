@@ -12,8 +12,7 @@ class IpeaDataClient(ABC):
 
 class IpcaClient(IpeaDataClient):
 
-    def __init__(self):
-        
+    def __init__(self):        
        self.sercodigo = "PRECOS12_IPCA12"
 
     def get_table(self):
@@ -36,6 +35,8 @@ class IpcaClient(IpeaDataClient):
         df = pd.DataFrame(
             data=data.get("value")
         )
+
+        df["VALDATA"] = pd.to_datetime(df["VALDATA"], utc=True).dt.floor("D").dt.tz_localize(None)
 
         return df
         
@@ -65,6 +66,8 @@ class IgpmClient(IpeaDataClient):
             data=data.get("value")
         )
 
+        df["VALDATA"] = pd.to_datetime(df["VALDATA"], utc=True).dt.floor("D").dt.tz_localize(None)
+
         return df   
 
 class ClientFactory:
@@ -74,9 +77,8 @@ class ClientFactory:
         if index == "IPCA":
             return IpcaClient()
         elif index == "IGP-M":
-            ...
+            return IgpmClient()
         else:
             return ValueError(f"Unknown client type: {index}")
 
 
-#

@@ -10,3 +10,11 @@ def test_ipca_client():
     if isinstance(data, pd.DataFrame):
         assert True
 
+def test_igpm_client():
+
+    igpm_client = ClientFactory.create_ipea_client(index="IGP-M")
+
+    data = igpm_client.get_table()
+
+    if isinstance(data, pd.DataFrame):
+        assert True

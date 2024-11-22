@@ -23,7 +23,10 @@ add_sidebar_title = st.sidebar.title(
 
 add_selectbox = st.sidebar.selectbox(
     "Selecione a concessão de interesse:",
-    ("Chapada dos Veadeiros", "Aparados da Serra", "Itatiaia"),
+    ("Chapada dos Veadeiros", 
+     "Itatiaia", 
+     "Tijuca - Trem Corcovado",
+     "Tijuca - Paineiras"),
     key="park"
 )
 
@@ -35,7 +38,8 @@ st.markdown("### Divisão de Apoio à Fiscalização das Delegações")
 
 st.divider()
 
-st.markdown(f"##### Informações para o Parque Nacional {str(st.session_state.park)}:")
+st.markdown(f"<h5>Informações para o <span style = 'color:green'> Parque Nacional {str(st.session_state.park)}: </span></h5>",
+            unsafe_allow_html=True)
 
 st.write("")
 
@@ -50,5 +54,19 @@ st.dataframe(
         park.get_info_table(),
         index=[0]
     ),
-    hide_index=True
+    hide_index=True,
+
+)
+
+st.write("")
+
+st.markdown("Evolução do preço base")
+
+st.line_chart(
+    park.get_price_var_table(),
+    x="VALDATA",
+    y="VALPRECO",
+    y_label= "Preço autorizado (R$)",
+    x_label= "Data",
+    color = "#133337"
 )

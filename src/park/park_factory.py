@@ -128,7 +128,7 @@ class TijucaTrem(Park):
         actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
 
         return round(float(actual_service_price), 0)
-    
+            
 class TijucaPaineiras(Park):
 
     def get_info_table(self):
@@ -138,6 +138,37 @@ class TijucaPaineiras(Park):
         return {
             "Entrada (Alta Temporada)": entry_price,
             "Entrada (Baixa Temporada)": entry_price/2,
+        }
+    
+class FernandoDeNoronha(Park):
+
+    def get_info_table(self):
+
+        entry_price = self.get_actual_entry_prices()
+
+        return {
+             "Entrada": entry_price,
+             "Meia Entrada": entry_price/2
+        }
+    
+class AparadosDaSerra(Park):
+
+    def get_info_table(self):
+
+        entry_price = self.get_actual_entry_prices()
+
+        return {
+            "Entrada": entry_price
+        }
+    
+class Iguacu(Park):
+
+    def get_info_table(self):
+
+        entry_price = self.get_actual_entry_prices()
+
+        return{
+            "Entrada": entry_price
         }
 
 class ParkFactory:
@@ -177,11 +208,34 @@ class ParkFactory:
 
             return TijucaPaineiras(
                 base_date = '2021-09-01',
-                base_entry_price = 44.0, 
-                update_frequency=12,
+                base_entry_price = 0, 
+                update_frequency= 12,
                 price_index="IGP-M"
             )
 
-        elif park == "":
+        elif park == "Fernando de Noronha":
 
-            ...
+            return FernandoDeNoronha(
+                base_date = '2023-08-01',
+                base_entry_price = 358.0,
+                update_frequency = 12,
+                price_index = "IGP-M"
+            )
+
+        elif park == "Aparados da Serra e Serra Geral":
+
+            return AparadosDaSerra(
+                base_date = '2021-07-01',
+                base_entry_price = 85.0,
+                update_frequency = 12,
+                price_index="IPCA"
+            )
+        
+        elif park == "Iguaçu":
+
+            return Iguacu(
+                base_date = '2021-09-01',
+                base_entry_price = 90.0,
+                update_frequency = 12,
+                price_index = "IPCA"
+            )

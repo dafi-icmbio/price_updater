@@ -26,13 +26,16 @@ add_selectbox = st.sidebar.selectbox(
     ("Chapada dos Veadeiros", 
      "Itatiaia", 
      "Tijuca - Trem Corcovado",
-     "Tijuca - Paineiras"),
+     #"Tijuca - Paineiras",
+     "Fernando de Noronha",
+     "Aparados da Serra e Serra Geral", 
+     "Iguaçu"),
     key="park"
 )
 
 park = ParkFactory.create_park(park=st.session_state.park)
 
-st.title("Instituto Chico Mendes de Conservação da Biodiversidade - ICMBio :leaves:", anchor="title")
+st.markdown("## Instituto Chico Mendes de Conservação da Biodiversidade - ICMBio :leaves:")
 
 st.markdown("### Divisão de Apoio à Fiscalização das Delegações")
 

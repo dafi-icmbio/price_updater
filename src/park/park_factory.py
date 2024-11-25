@@ -72,18 +72,18 @@ class Park(ABC):
 
         return price_var_table
 
+    def get_actual_service_prices(self):
+
+        actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
+
+        return round(float(actual_service_price), 0)
+
     @abstractmethod
     def get_info_table(self) -> dict:
         ...
 
 class ChapadaDosVeadeiros(Park):
-    
-    def get_actual_service_prices(self):  
-
-        actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
-
-        return round(float(actual_service_price), 0)
-    
+        
     def get_info_table(self):
 
         entry_price = self.get_actual_entry_prices()

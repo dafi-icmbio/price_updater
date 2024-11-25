@@ -115,11 +115,19 @@ class TijucaTrem(Park):
 
         entry_price = self.get_actual_entry_prices()
 
+        train_price = self.get_actual_service_prices()
+
         return {
             "Entrada (Alta Temporada)": entry_price,
             "Entrada (Baixa Temporada)": entry_price/2,
-            "Passagem": entry_price*2,
+            "Passagem": train_price,
         }
+
+    def get_actual_service_prices(self):
+
+        actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
+
+        return round(float(actual_service_price), 0)
     
 class TijucaPaineiras(Park):
 
@@ -160,6 +168,7 @@ class ParkFactory:
             return TijucaTrem(
                 base_date = '2021-09-01',
                 base_entry_price = 44.0,
+                base_service_price = 60.0,
                 update_frequency=12,
                 price_index="IPCA"
             )
@@ -173,3 +182,6 @@ class ParkFactory:
                 price_index="IGP-M"
             )
 
+        elif park == "":
+
+            ...

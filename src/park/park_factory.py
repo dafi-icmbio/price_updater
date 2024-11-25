@@ -234,8 +234,8 @@ class ParkFactory:
         elif park == "Iguaçu":
 
             return Iguacu(
-                base_date = '2021-09-01',
-                base_entry_price = 90.0,
+                base_date = '2022-03-01',
+                base_entry_price = 100.0,
                 update_frequency = 12,
                 price_index = "IPCA"
             )

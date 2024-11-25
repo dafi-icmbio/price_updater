@@ -168,7 +168,9 @@ class Iguacu(Park):
         entry_price = self.get_actual_entry_prices()
 
         return{
-            "Entrada": entry_price
+            "Entrada": entry_price,
+            "Mercosul/Brasil": 0.9*entry_price,
+            "Entorno": 0.2*entry_price 
         }
 
 class ParkFactory:

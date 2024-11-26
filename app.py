@@ -29,7 +29,7 @@ add_selectbox = st.sidebar.selectbox(
      #"Tijuca - Paineiras",
      "Fernando de Noronha",
      "Aparados da Serra e Serra Geral", 
-     "Iguaçu"),
+     "Iguaçu - Cataratas"),
     key="park"
 )
 

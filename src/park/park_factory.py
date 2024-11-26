@@ -258,7 +258,7 @@ class ParkFactory:
                 price_index="IPCA"
             )
         
-        elif park == "Iguaçu":
+        elif park == "Iguaçu - Cataratas":
 
             return Iguacu(
                 base_date = '2022-12-01',

@@ -247,6 +247,20 @@ doc = ["sphinx (==4.3.2)", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphi
 test = ["coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mock", "mypy", "pre-commit", "pytest (>=7.3.1)", "pytest-cov", "pytest-instafail", "pytest-mock", "pytest-sugar", "typing-extensions"]
 
 [[package]]
+name = "holidays"
+version = "0.61"
+description = "World Holidays Framework"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "holidays-0.61-py3-none-any.whl", hash = "sha256:917d98de2b8260f0f763130eed074eedbf7239c9e98e561cb97230b4727ecc91"},
+    {file = "holidays-0.61.tar.gz", hash = "sha256:eede28808bc9e09118ffd837e05e57b1c644a5cd5a8cebb4cef1e7bc19e30437"},
+]
+
+[package.dependencies]
+python-dateutil = "*"
+
+[[package]]
 name = "idna"
 version = "3.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -1203,4 +1217,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "070ab6d648e182cf28192f4ecf7cda0e99ff22abb04293b121daa0a0f2329f26"
+content-hash = "391021cd8dbd5c20902bf5e33cea6cc7f596d68343969d59c69703162b4003e4"

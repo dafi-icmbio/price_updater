@@ -20,4 +20,3 @@ add_sidebar_logo = st.logo(
     size="large"
 )
 
-

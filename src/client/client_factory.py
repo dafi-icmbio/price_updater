@@ -45,6 +45,11 @@ class IgpmClient(IpeaDataClient):
     def __init__(self):
         self.sercodigo = "IGP12_IGPM12"
 
+class SelicClient(IpeaDataClient):
+
+    def __init__(self):
+        self.sercodigo = "GM366_TJOVER366"
+
 class ClientFactory:
 
     @staticmethod
@@ -53,6 +58,8 @@ class ClientFactory:
             return IpcaClient()
         elif index == "IGP-M":
             return IgpmClient()
+        elif index == "SELIC":
+            return SelicClient()
         else:
             return ValueError(f"Unknown client type: {index}")
 

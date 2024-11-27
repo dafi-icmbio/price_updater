@@ -9,7 +9,8 @@ from src.client.client_factory import ClientFactory
 
 class Park(ABC):
 
-    def __init__(self, 
+    def __init__(self,
+                 name: str, 
                  base_date: str, 
                  base_entry_price: float,
                  effectiveness: int,
@@ -17,6 +18,7 @@ class Park(ABC):
                  base_service_price: Optional[float] = None
                  ):
         
+        self.name = name
         self.base_date = base_date
         self.base_entry_price = base_entry_price
         self.effectiveness = effectiveness
@@ -205,6 +207,7 @@ class ParkFactory:
 
         if park == "Chapada dos Veadeiros":
             return ChapadaDosVeadeiros(
+                name = "da Chapada dos Veadeiros",
                 base_date = '2021-09-01',
                 base_entry_price = 40.0,
                 effectiveness = 2,
@@ -215,6 +218,7 @@ class ParkFactory:
         elif park == "Itatiaia":
 
             return Itatiaia(
+                name = "de Itatiaia",
                 base_date = '2022-09-01',
                 base_entry_price = 40.0,
                 effectiveness= 2,
@@ -224,6 +228,7 @@ class ParkFactory:
         elif park == "Tijuca - Trem Corcovado":
 
             return TijucaTrem(
+                name = "da Tijuca - Trem Corcovado",
                 base_date = '2021-09-01',
                 base_entry_price = 44.0,
                 base_service_price = 60.0,
@@ -234,6 +239,7 @@ class ParkFactory:
         elif park == "Tijuca - Paineiras":
 
             return TijucaPaineiras(
+                name = "da Tijuca",
                 base_date = '2021-09-01',
                 base_entry_price = 0, 
                 effectiveness= 2,
@@ -243,6 +249,7 @@ class ParkFactory:
         elif park == "Fernando de Noronha":
 
             return FernandoDeNoronha(
+                name = "Marinho Fernando de Noronha",
                 base_date = '2023-08-01',
                 base_entry_price = 358.0,
                 effectiveness = 2,
@@ -252,6 +259,7 @@ class ParkFactory:
         elif park == "Aparados da Serra e Serra Geral":
 
             return AparadosDaSerra(
+                name = "de Aparados da Serra e Serra Geral",
                 base_date = '2021-07-01',
                 base_entry_price = 85.0,
                 effectiveness = 2,
@@ -261,6 +269,7 @@ class ParkFactory:
         elif park == "Iguaçu - Cataratas":
 
             return Iguacu(
+                name = "do Iguaçu - Cataratas",
                 base_date = '2022-11-01',
                 base_entry_price = 82.82,
                 effectiveness = 0,

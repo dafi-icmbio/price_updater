@@ -20,9 +20,11 @@ try:
 
     query_params = st.query_params.park
 
-    park = ParkFactory.create_park(park=st.session_state.park)
+    park = ParkFactory.create_park(park=query_params)
 
-except:
+    st.query_params.clear()
+
+except AttributeError:
 
     park = ParkFactory.create_park(park=st.session_state.park)
 
@@ -32,7 +34,7 @@ st.markdown("### Divisão de Apoio à Fiscalização das Delegações")
 
 st.divider()
 
-st.markdown(f"<h5>Informações para o <span style = 'color:green'> Parque Nacional {str(st.session_state.park)}: </span></h5>",
+st.markdown(f"<h5>Informações para o <span style = 'color:green'> Parque Nacional {park.name}: </span></h5>",
             unsafe_allow_html=True)
 
 st.write("")

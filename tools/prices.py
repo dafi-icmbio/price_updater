@@ -10,7 +10,7 @@ add_selectbox = st.sidebar.selectbox(
     ("Chapada dos Veadeiros", 
      "Itatiaia", 
      "Tijuca - Trem Corcovado",
-     #"Tijuca - Paineiras",
+     "Tijuca - Paineiras",
      "Fernando de Noronha",
      "Aparados da Serra e Serra Geral", 
      "Iguaçu - Cataratas"),

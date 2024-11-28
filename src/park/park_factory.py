@@ -199,6 +199,16 @@ class Iguacu(Park):
             "Mercosul/Brasil": 0.9*entry_price,
             "Entorno": 0.2*entry_price 
         }
+    
+class Macuco(Park):
+
+    def get_info_table(self):
+
+        service_price = self.get_actual_entry_prices()
+
+        return {
+            "Passeio do Macuco Tradicional": service_price
+        }
 
 class ParkFactory:
 
@@ -239,11 +249,11 @@ class ParkFactory:
         elif park == "Tijuca - Paineiras":
 
             return TijucaPaineiras(
-                name = "da Tijuca",
+                name = "da Tijuca - Paineiras",
                 base_date = '2021-09-01',
-                base_entry_price = 0, 
+                base_entry_price = 44.0, 
                 effectiveness= 2,
-                price_index="IGP-M"
+                price_index="IPCA"
             )
 
         elif park == "Fernando de Noronha":
@@ -274,4 +284,14 @@ class ParkFactory:
                 base_entry_price = 82.82,
                 effectiveness = 0,
                 price_index = "IPCA"
+            )
+        
+        elif park == "Iguaçu - Ilha do Sol":
+
+            return Macuco(
+                name = "do Iguaçu - Macuco Safari",
+                base_date = '2022-09-01',
+                base_entry_price = 0,
+                effectiveness = 2,
+                price_index = "IGP-M"
             )

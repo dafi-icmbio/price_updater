@@ -32,12 +32,14 @@ with st.form(key="fine_form", clear_on_submit=False):
     data_vencimento_gru = st.date_input("Data de Vencimento", 
                                         value="today", 
                                         format="DD/MM/YYYY", 
-                                        key="data_vencimento_gru")
+                                        key="data_vencimento_gru",
+                                        )
 
     data_pagamento_gru = st.date_input("Data de Pagamento", 
                                     value = (datetime.today() + timedelta(days=1)), 
                                     format="DD/MM/YYYY", 
-                                    key="data_pagamento_gru")
+                                    key="data_pagamento_gru",
+                                    )
 
     submitted = st.form_submit_button("Calcular")
 

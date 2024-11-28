@@ -3,8 +3,8 @@ import streamlit as st
 st.set_page_config(
     page_title="ICMBio - DAFI",  
     page_icon="images/logo icmbio.png",
-    layout="centered",              
-    initial_sidebar_state="expanded" 
+    layout="centered",
+    initial_sidebar_state="auto"
 )
 
 prices_page = st.Page("tools/prices.py", title="Preços Vigentes", default=True, icon=":material/attach_money:")

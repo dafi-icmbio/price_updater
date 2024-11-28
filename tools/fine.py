@@ -50,3 +50,9 @@ with st.form(key="fine_form", clear_on_submit=False):
         st.metric("Valor devido:", value=f"R$ {round(valor_gru + fine,2)}", delta=f"R$ {round(fine,2)}")
 
 
+st.markdown(
+    f"""<em><p style= 'color:gray; font-size:12px'>*O valores dispostos nesta página 
+    são apenas referenciais, cuja validade deve ser confirmada por meio
+    dos instrumentos legais publicados pelo ICMBio.</p></em>""",
+    unsafe_allow_html=True
+)

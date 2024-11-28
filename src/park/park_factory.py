@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pandas as pd
 import numpy as np
@@ -35,7 +35,23 @@ class Park(ABC):
 
     def get_actual_entry_prices(self):
 
-        actual_entry_price = self.base_entry_price * (self.get_last_index()/self.get_base_index())
+        t_year = datetime.today().year
+
+        t_month = datetime.today().month
+
+        base_date_dt = pd.Timestamp(self.base_date)
+
+        effective_date = datetime.today() + pd.DateOffset(months=self.effectiveness)
+
+        if base_date_dt.replace(month=t_month) < effective_date:
+
+            var_table = self.get_price_var_table()
+
+            actual_entry_price = var_table.query("VALDATA.dt.year == @t_year").VALPRECO.iloc[0]
+        
+        else:
+
+            actual_entry_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
 
         return round(float(actual_entry_price), 0)
     
@@ -74,10 +90,46 @@ class Park(ABC):
         price_var_table["VALDATA"] = price_var_table["VALDATA"] + pd.DateOffset(months=self.effectiveness)
 
         return price_var_table
+    
+    def get_price_service_var_table(self):
+
+        date = pd.Timestamp(self.base_date)
+
+        month = pd.Timestamp(self.base_date).month
+
+        month_indexes = self.index_table.query("VALDATA.dt.month == @month and VALDATA >= @date")
+
+        price_var_table = month_indexes.loc[:,["VALDATA", "VALVALOR"]]
+
+        price_var_table["VALVAR"] = price_var_table["VALVALOR"]/price_var_table["VALVALOR"].shift(1)
+
+        price_var_table["VALVAR"] = price_var_table["VALVAR"].fillna(1)
+
+        price_var_table["VALPRECO"] = self.base_service_price * price_var_table["VALVAR"].cumprod()
+
+        price_var_table["VALDATA"] = price_var_table["VALDATA"] + pd.DateOffset(months=self.effectiveness)
+
+        return price_var_table
 
     def get_actual_service_prices(self):
 
-        actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
+        t_year = datetime.today().year
+
+        t_month = datetime.today().month
+
+        base_date_dt = pd.Timestamp(self.base_date)
+
+        effective_date = datetime.today() + pd.DateOffset(months=self.effectiveness)
+
+        if base_date_dt.replace(month=t_month) < effective_date:
+
+            var_table = self.get_price_service_var_table()
+
+            actual_service_price = var_table.query("VALDATA.dt.year == @t_year").VALPRECO.iloc[0]
+        
+        else:
+
+            actual_service_price = self.base_service_price * (self.get_last_index()/self.get_base_index())
 
         return round(float(actual_service_price), 0)
 
@@ -290,8 +342,8 @@ class ParkFactory:
 
             return Macuco(
                 name = "do Iguaçu - Macuco Safari",
-                base_date = '2022-09-01',
-                base_entry_price = 0,
-                effectiveness = 2,
+                base_date = '2021-10-01',
+                base_entry_price = 361.60,
+                effectiveness = 3,
                 price_index = "IGP-M"
             )

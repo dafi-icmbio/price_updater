@@ -342,8 +342,8 @@ class ParkFactory:
 
             return Macuco(
                 name = "do Iguaçu - Macuco Safari",
-                base_date = '2021-10-01',
-                base_entry_price = 361.60,
+                base_date = '2010-10-01',
+                base_entry_price = 144.37,
                 effectiveness = 3,
                 price_index = "IGP-M"
             )
